@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Anniversary ❤️</title>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-top: 30px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff66b2; }
+            to { text-shadow: 0 0 20px #ff1a75, 0 0 30px #ff1a75; }
+        }
+
+        /* Typewriter */
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid pink;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3s steps(20, end), blink-caret 0.75s step-end infinite;
+            font-size: 2rem;
+            color: pink;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: pink }
+        }
+
+        /* Carousel */
+        .carousel {
+            position: relative;
+            max-width: 90%;
+            height: 500px; /* fixed height */
+            margin: 40px auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(255,105,180,0.5);
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slides img {
+            height: 500px;  /* keeps height */
+            width: auto;    /* keeps aspect ratio */
+            object-fit: contain; /* ensures no distortion */
+            flex-shrink: 0;
+        }
+
+        /* Hearts Animation */
+        .heart {
+            position: fixed;
+            top: -10px;
+            color: pink;
+            font-size: 24px;
+            animation: float 5s linear infinite;
+        }
+        @keyframes float {
+            to { transform: translateY(100vh); opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .typewriter { font-size: 1.5rem; }
+            .carousel { height: 300px; }
+            .slides img { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Happy Anniversary ❤️</h1>
+    <div class="typewriter" id="herName"></div>
+
+    <div class="carousel">
+        <div class="slides" id="slides"></div>
+    </div>
+    <p>I love you</p>
+
+    <script>
+        // Typewriter name animation
+        const herName = "💖 To My Love, Hannatu 💖";
+        let i = 0;
+        function typeWriter() {
+            if (i < herName.length) {
+                document.getElementById("herName").innerHTML += herName.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        typeWriter();
+
+        // Image list (add all your file names here)
+        const imageList = [
+            "FWCZ3786.JPG",
+            "hanna3.JPG",
+            "hanna4.JPG",
+            "Hannatu.JPG",
+            // "hanna6.JPG"
+        ];
+        const slides = document.getElementById("slides");
+        imageList.forEach(img => {
+            const image = document.createElement("img");
+            image.src = `images/${img}`;
+            slides.appendChild(image);
+        });
+
+        // Carousel
+        let index = 0;
+        setInterval(() => {
+            index++;
+            if (index >= imageList.length) index = 0;
+            slides.style.transform = `translateX(-${index * 100}%)`;
+        }, 3000);
+
+        // Floating hearts
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "💖";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 500);
+    </script>
+
+</body>
+</html>
